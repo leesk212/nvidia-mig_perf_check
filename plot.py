@@ -8,14 +8,21 @@ import matplotlib.ticker as mticker
 X = [*range(0,20001,1250)]
 X[0] = X[0] +1 
 
-del X[11]
+#del X[11]
 print(X)
 print(len(X))
 
+f_enabled = open("result_of_mig_enabled.txt",r)
+lists_ = f_enabled.readlines()
+enabled_Y = []
+for element in lists_:
+    enabled_Y.append(round(element,2))
 
-enabled_Y = [0.96,1.005,1.272,1.809,2.603,3.733,5.291,7.054,9.191,12.317,15.438,23.513,28.933,34.760,41.154,48.105]
-
-disabled_Y = [0.384,0.651,1.562,3.117,5.319,8.342,12.029,16.553,21.859,28.148,35.317,52.249,63.227,74.384,87.178,100.213]
+f_disabled = open("result_of_mig_disabled.txt",r) 
+lists = f_disabled.readlines()
+disabled_Y = []
+for element in lists:
+    disabled_Y.append(round(element,2))
 
 print(len(enabled_Y),len(disabled_Y))
 
@@ -30,5 +37,6 @@ plt.title("MIG Perf Test")
 plt.ylabel("\nExecution Time (s)")
 plt.xlabel("Size of calculated matrix (r'$4n^2$')")
 plt.xticks(X,rotation=45)
+plt.grid()
 plt.show()
 
