@@ -1,8 +1,7 @@
 #!/bin/bash
 i=1
 
-echo "logging" > ./result_of_mig_disabled.txt
-
+echo "logging" > ./result_of_mig_enabled.txt
 
 while :
 do
@@ -27,27 +26,25 @@ do
         if [ ${i} == "17" ] ; then size=20000; fi
         if [ ${i} == "18" ] ; then break; fi
 		
+	#disable=2
+	#size=$(($size * $disable))
 	
-	disable=2
-
-	size=$(($size * $disable))
-	
-	echo "logging" > ./mig_disabled/mig_disabled_${size}.txt
+	echo "logging" > ./mig_enabled/mig_enabled_${size}.txt
 
 	for number in {1..10} 
        		do
 			echo $size
 			StartTime=$(date +%s.%3N)
-			./mig_disabled.sh $size
+			./mig_enabled.sh $size
 			EndTime=$(date +%s.%3N)
 			diff=$( echo "$EndTime - $StartTime" | bc -l )		
 
 			echo " Latency: $diff s"
-			echo "$diff" >> ./mig_disabled/mig_disabled_${size}.txt
+			echo "$diff" >> ./mig_enabled/mig_enabled_${size}.txt
 
 		done
 		
-	python3 avg.py mig_disabled_${size}.txt >> ./result_of_mig_disabled.txt
+	python3 avg.py mig_enabled_${size}.txt >> ./result_of_mig_enabled.txt
 
 	((i+=1))
 done
