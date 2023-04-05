@@ -12,6 +12,8 @@ Real_X = []
 for x in X:
     Real_X.append(format(x,',d'))
 
+X_2 = [*range(0,15000,2500)]
+X_2[0] = X_2[0] +2 
 
 print(X)
 print(len(X))
@@ -24,7 +26,7 @@ for i,element in enumerate(lists_):
         continue
     enabled_Y.append(round(float(element),2))
 
-f_disabled = open("result_of_mig_disabled.txt",'r') 
+f_disabled = open("result_of_mig_ci_enabled.txt",'r') 
 lists = f_disabled.readlines()
 disabled_Y = []
 for i,element in enumerate(lists):
@@ -36,11 +38,10 @@ print(len(enabled_Y),len(disabled_Y))
 
 plt.figure(figsize=(8,6))
 plt.plot(X,enabled_Y,label='MIG Enabled', color='blueviolet')
-plt.plot(X,disabled_Y,label='MIG Disabled',color='forestgreen')
+plt.plot(X_2,disabled_Y,label='MIG Enabled, CI_Enabled')
 plt.legend()
 plt.gca().spines['right'].set_visible(False) #오른쪽 테두리 제거
 plt.gca().spines['top'].set_visible(False) #위 테두리 제거
-#plt.gca().xaxis.set_major_formatter(mticker.FuncFormatter('%.3f'))
 plt.gca().yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 plt.title("MIG Perf Test")
 plt.ylabel("\nExecution Time (s)")

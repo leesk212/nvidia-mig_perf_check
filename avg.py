@@ -1,6 +1,6 @@
 import sys
 
-file_path = "./mig_disabled/" + sys.argv[1]
+file_path = "./mig_ci_enabled/" + sys.argv[1]
 
 #print(file_path)
 
